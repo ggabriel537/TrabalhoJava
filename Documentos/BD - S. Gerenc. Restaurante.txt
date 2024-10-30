@@ -1,0 +1,54 @@
+CREATE TABLE funcionarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    senha VARCHAR(100) NOT NULL, -- Usar hash para segurança
+    cargo VARCHAR(50),
+    data_contratacao DATE DEFAULT CURRENT_DATE
+);
+
+CREATE TABLE cardapio (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    descricao TEXT,
+    preco DECIMAL(10, 2) NOT NULL,
+    disponivel BOOLEAN DEFAULT TRUE
+);
+
+CREATE TABLE pedidos (
+    id SERIAL PRIMARY KEY,
+    funcionario_id INT REFERENCES funcionarios(id),
+    data_pedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    total DECIMAL(10, 2) NOT NULL
+);
+
+CREATE TABLE itens_pedido (
+    id SERIAL PRIMARY KEY,
+    pedido_id INT REFERENCES pedidos(id) ON DELETE CASCADE,
+    item_id INT REFERENCES cardapio(id),
+    quantidade INT NOT NULL,
+    preco_unitario DECIMAL(10, 2) NOT NULL
+);
+
+/*FUNCIONALIDADES*/
+
+INSERT INTO funcionarios (nome, email, senha, cargo) VALUES ('João Pedro', 'joao@restaurante.com', 'senha123', 'Garçom'); /*CADASTRA UM FUNCIONARIO*/
+
+SELECT * FROM funcionarios WHERE email = 'joao@restaurante.com' AND senha = 'senha123'; /*VERIFICA SE O FUNC EXISTE*/
+
+INSERT INTO cardapio (nome, descricao, preco) VALUES ('Pizza Margherita', 'Pizza com molho, queijo e manjericão', 25.90); /*ADICIONA UM NOVO PRODUTO*/
+
+DELETE FROM cardapio WHERE id = 1; /*REMOVE UM ITEM DO CARDAPIO*/
+
+SELECT * FROM cardapio WHERE disponivel = TRUE; /*SELECIONA TODOS OS ITENS DO CARDAPIO*/
+
+--PEDIDOS--
+
+INSERT INTO pedidos (funcionario_id, total) VALUES (1, 50.00); /*ADICIONAR UM PEDIDO*/
+
+INSERT INTO itens_pedido (pedido_id, item_id, quantidade, preco_unitario) VALUES (1, 1, 2, 25.00); /*ADICIONA ITENS AO PEDIDO*/
+
+DELETE FROM pedidos WHERE id = 1; /*DELETA UM PEDIDO*/
+
+SELECT * FROM pedidos; /*LISTA OS PEDIDOS*/
+
