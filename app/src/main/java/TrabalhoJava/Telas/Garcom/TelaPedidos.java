@@ -1,11 +1,22 @@
-package Telas.Garcom;
+package TrabalhoJava.Telas.Garcom;
 
-import Telas.Gestor.TelaListarCardapio;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+
+import java.util.List;
+
+import javax.swing.table.DefaultTableModel;
+
+import TrabalhoJava.BancoDeDados.Controllers.PedidoController;
+import TrabalhoJava.BancoDeDados.Models.ItemRepositorio;
+import TrabalhoJava.Entidades.Item;
+import TrabalhoJava.Entidades.Pedido;
+import TrabalhoJava.Telas.Gestor.TelaListarCardapio;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -40,7 +51,7 @@ public class TelaPedidos extends javax.swing.JFrame {
         btnRemoverPedidos = new javax.swing.JButton();
         btnListarPedidos = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabela = new javax.swing.JTable();
         btnConsultar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -101,6 +112,11 @@ public class TelaPedidos extends javax.swing.JFrame {
         });
 
         btnRemoverPedidos.setText("Remover Pedidos");
+        btnRemoverPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverPedidosActionPerformed(evt);
+            }
+        });
 
         btnListarPedidos.setText("Listar Pedidos");
         btnListarPedidos.addActionListener(new java.awt.event.ActionListener() {
@@ -109,22 +125,22 @@ public class TelaPedidos extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Mesa", "Item", "Preço", "Descrição"
+                "ID", "Mesa", "Item", "Preço", "Descrição"
             }
         ) {
             Class[] types = new Class [] {
-                Integer.class, String.class, Float.class, String.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -135,7 +151,7 @@ public class TelaPedidos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabela);
 
         btnConsultar.setText("Consultar Cardápio");
         btnConsultar.addActionListener(new java.awt.event.ActionListener() {
@@ -237,37 +253,69 @@ public class TelaPedidos extends javax.swing.JFrame {
 
     private void btnListarPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarPedidosActionPerformed
         // TODO add your handling code here:
+        
+        //TABELA AQUI
+        preencherTabela(PedidoController.listarPedidos());
+     
     }//GEN-LAST:event_btnListarPedidosActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
+    private void btnRemoverPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverPedidosActionPerformed
+        // TODO add your handling code here:
+        
+        //Mensagem que pede o ID do pedido
+        
+        JTextField textFieldUser = new JTextField();
+int optionAdverte = JOptionPane.showConfirmDialog(null, textFieldUser, "Informe o ID do pedido para Concluí-lo", JOptionPane.OK_CANCEL_OPTION);
 
-        /* Create and display the form */
+if (optionAdverte == JOptionPane.OK_OPTION) {
+    try {
+        Integer convertido = Integer.parseInt(textFieldUser.getText());
+        int exito = PedidoController.deletarPedido(convertido);
+        if (exito == 1) {
+            JOptionPane.showMessageDialog(null, "O pedido foi marcado como Concluído.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Não foi possível concluir o pedido. Verifique o ID.");
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "Por favor, insira um número válido para o ID.");
+    }
+}
+
+    }//GEN-LAST:event_btnRemoverPedidosActionPerformed
+
+  private void preencherTabela(List<Pedido> pedidos) {
+    DefaultTableModel model = (DefaultTableModel) tabela.getModel();
+    model.setRowCount(0);
+
+    for (Pedido pedido : pedidos) {
+   
+        Object[] precoDesc = resgatarPrecoDesc(pedido.getItem());
+
+        model.addRow(new Object[]{
+            pedido.getId(),
+            pedido.getMesa(),
+            pedido.getItem(),
+            precoDesc[0], 
+            precoDesc[1]  
+        });
+    }
+}
+
+private Object[] resgatarPrecoDesc(String nomeItem) {
+    ItemRepositorio itemRepositorio = new ItemRepositorio();
+    List<Item> itemList = itemRepositorio.listar();
+
+    for (Item item : itemList) {
+        if (item.getNomeItem().equals(nomeItem)) { 
+            return new Object[]{item.getPreco(), item.getDescricao()};
+        }
+    }
+    return new Object[]{"Preço não encontrado", "Descrição não encontrada"};
+}
+
+    
+    public static void main(String args[]) {
+   
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaPedidos().setVisible(true);
@@ -288,6 +336,6 @@ public class TelaPedidos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
 }

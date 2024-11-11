@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ItemRepositorio {
 
-    public void salvar(Item item) {
+    public static void salvar(Item item) {
         EntityManager em = JPAUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
@@ -17,7 +17,7 @@ public class ItemRepositorio {
         em.close();
     }
 
-    public List<Item> listar() {
+    public static List<Item> listar() {
         EntityManager em = JPAUtil.getEntityManager();
         List<Item> items = em.createQuery("SELECT i FROM item i", Item.class).getResultList();
         em.close();

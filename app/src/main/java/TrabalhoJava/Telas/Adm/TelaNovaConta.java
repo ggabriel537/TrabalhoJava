@@ -1,14 +1,20 @@
+package TrabalhoJava.Telas.Adm;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Telas.Adm;
+package TrabalhoJava.Telas.Adm;
+
+import TrabalhoJava.BancoDeDados.Controllers.UsuarioController;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Pedro
  */
 public class TelaNovaConta extends javax.swing.JFrame {
+ private Integer permissaoInserida;
 
     /**
      * Creates new form TelaNovaConta
@@ -34,11 +40,11 @@ public class TelaNovaConta extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        txtUsuario = new javax.swing.JTextField();
-        txtSenha = new javax.swing.JTextField();
+        permissao = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         btnSalvar = new javax.swing.JButton();
+        txtUsuario = new javax.swing.JTextField();
+        txtSenha = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -99,7 +105,12 @@ public class TelaNovaConta extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Senha:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Garçom", "Gestor", "Administador" }));
+        permissao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Garçom", "Gestor", "Administador" }));
+        permissao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                permissaoActionPerformed(evt);
+            }
+        });
 
         jLabel4.setBackground(new java.awt.Color(0, 0, 0));
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
@@ -109,6 +120,12 @@ public class TelaNovaConta extends javax.swing.JFrame {
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarActionPerformed(evt);
+            }
+        });
+
+        txtUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsuarioActionPerformed(evt);
             }
         });
 
@@ -132,7 +149,7 @@ public class TelaNovaConta extends javax.swing.JFrame {
                                     .addComponent(jLabel4))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jComboBox1, 0, 219, Short.MAX_VALUE)
+                                    .addComponent(permissao, 0, 219, Short.MAX_VALUE)
                                     .addComponent(txtUsuario)
                                     .addComponent(txtSenha))))))
                 .addContainerGap(89, Short.MAX_VALUE))
@@ -146,13 +163,13 @@ public class TelaNovaConta extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(22, 22, 22)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(permissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(27, 27, 27)
                 .addComponent(btnSalvar)
@@ -198,8 +215,45 @@ public class TelaNovaConta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        // TODO add your handling code here:
+     
+        //Salva o user, senha e permissao;
+     
+        String userInformado = txtUsuario.getText();
+        String senhaInformada = txtSenha.getText();
+        Integer permissaoRecebida = permissaoInserida + 1;
+
+        if (txtSenha.isValid() && txtUsuario.isValid() && permissao!=null) { //Precisa ser feito, pois não há como verificar no Controller
+            try {
+                int resolucao = UsuarioController.salvarUsuario(userInformado, senhaInformada, permissaoRecebida);
+              
+                if (resolucao == 1) {
+                   
+                    JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
+                } else {
+                    if (resolucao == 2) {
+                        JOptionPane.showMessageDialog(null, "Dados insuficientes ou inválidos.");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Este usuário já está cadastrado no sistema.");
+                    }
+                }
+            } catch (Exception ex) {
+                System.err.print("Catch-100");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Dados insuficientes ou inválidos.");
+        }
+    }
+        
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void permissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_permissaoActionPerformed
+        // TODO add your handling code here:
+    permissaoInserida = permissao.getSelectedIndex();
+    }//GEN-LAST:event_permissaoActionPerformed
+
+    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -239,7 +293,6 @@ public class TelaNovaConta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -248,6 +301,7 @@ public class TelaNovaConta extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JComboBox<String> permissao;
     private javax.swing.JTextField txtSenha;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables

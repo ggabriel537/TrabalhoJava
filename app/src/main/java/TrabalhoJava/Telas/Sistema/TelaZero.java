@@ -2,7 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Telas.Sistema;
+package TrabalhoJava.Telas.Sistema;
+
+
+import TrabalhoJava.BancoDeDados.Controllers.UsuarioController;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -190,27 +194,23 @@ public class TelaZero extends javax.swing.JFrame {
         // TODO add your handling code here:
         String userInformado = txtUsuario.getText();
         String senhaInformada = txtSenha.getText();
-        /*
-        if (txtSenha.isValid() && txtUser.isValid()) { //Precisa ser feito, pois não há como verificar no Controller
+        
+        if (txtSenha.isValid() && txtUsuario.isValid()) { //Precisa ser feito, pois não há como verificar no Controller
             try {
-                int resolucao = CadastroImplementacao.efetuarCadastro(userInformado, senhaInformada, 1);
+                int resolucao = UsuarioController.salvarUsuario(userInformado, senhaInformada, 3); //pode nao ser 3 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 if (resolucao == 1) {
                     JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
                     dispose();
                     new TelaLogin().setVisible(true);
                 } else {
-                    if (resolucao == 2) {
                         JOptionPane.showMessageDialog(null, "Dados insuficientes ou inválidos.");
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Este usuário já está cadastrado no sistema.");
                     }
-                }
             } catch (Exception ex) {
-                System.err.print("Catch-100");
+                System.err.print("Catch-100 - Erro no botao comecarda TelaZero");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Dados insuficientes ou inválidos.");
-        }*/
+        }
     }//GEN-LAST:event_btnComecarActionPerformed
 
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed

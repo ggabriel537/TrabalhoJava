@@ -2,7 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Telas.Garcom;
+package TrabalhoJava.Telas.Garcom;
+
+import TrabalhoJava.BancoDeDados.Controllers.PedidoController;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -45,6 +48,11 @@ public class TelaAdicionarPedidos extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 51));
 
         btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
@@ -173,7 +181,35 @@ public class TelaAdicionarPedidos extends javax.swing.JFrame {
 
     private void btnAddPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPedidoActionPerformed
         // TODO add your handling code here:
+        
+        //Guarda a mesa e o item pedido;
+        
+        String ItemInformado = txtItem.getText();
+        Integer MesaInformada = (Integer) numMesa.getValue();
+
+        
+        if (txtItem.isValid() && MesaInformada!=null) { //Precisa ser feito, pois não há como verificar no Controller
+            try {
+                int resolucao = PedidoController.salvarPedido(MesaInformada,ItemInformado);
+                if (resolucao == 1) {
+                    JOptionPane.showMessageDialog(null, "Item cadastrado com sucesso!");
+                    dispose();
+                } else {
+                        JOptionPane.showMessageDialog(null, "Dados insuficientes ou inválidos.");
+                    }
+            } catch (Exception ex) {
+                System.err.print("Catch-100 - Erro no botao salvar - Tela addPedidos");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Dados insuficientes ou inválidos.");
+        }
+        
     }//GEN-LAST:event_btnAddPedidoActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_btnSairActionPerformed
 
     /**
      * @param args the command line arguments

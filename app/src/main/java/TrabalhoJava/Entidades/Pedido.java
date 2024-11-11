@@ -1,4 +1,4 @@
-package Entidades;
+package TrabalhoJava.Entidades;
 
 import jakarta.persistence.*;
 

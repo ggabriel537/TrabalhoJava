@@ -2,7 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Telas.Gestor;
+package TrabalhoJava.Telas.Gestor;
+
+import TrabalhoJava.BancoDeDados.Controllers.ItemController;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -52,6 +55,11 @@ public class TelaAdicionarAoCardapio extends javax.swing.JFrame {
         jLabel1.setText("PedidoFacil");
 
         btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -84,10 +92,22 @@ public class TelaAdicionarAoCardapio extends javax.swing.JFrame {
 
         jLabel3.setText("Informe os atributos necessários");
 
+        txtItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtItemActionPerformed(evt);
+            }
+        });
+
         txtPreco.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtPreco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPrecoActionPerformed(evt);
+            }
+        });
+
+        txtDescricao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDescricaoActionPerformed(evt);
             }
         });
 
@@ -104,6 +124,11 @@ public class TelaAdicionarAoCardapio extends javax.swing.JFrame {
         jLabel6.setText("Descrição");
 
         btnFeito.setText("Feito");
+        btnFeito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFeitoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -197,6 +222,48 @@ public class TelaAdicionarAoCardapio extends javax.swing.JFrame {
     private void txtPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPrecoActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnFeitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFeitoActionPerformed
+        // TODO add your handling code here:
+        
+        //Salva o item preco e descr;
+        
+        String ItemInformado = txtItem.getText();
+        String PrecoInformado = txtPreco.getText();
+        String DescricaoInformada = txtDescricao.getText();
+        
+        
+        if (txtItem.isValid() && txtPreco.isValid() && txtDescricao.isValid() ) { //Precisa ser feito, pois não há como verificar no Controller
+            try {
+                double precoConvertido = Double.parseDouble(PrecoInformado);
+                
+                int resolucao = ItemController.salvarItem(ItemInformado, precoConvertido, DescricaoInformada);
+                if (resolucao == 1) {
+                    JOptionPane.showMessageDialog(null, "Item cadastrado com sucesso!");
+                    dispose();
+                } else {
+                        JOptionPane.showMessageDialog(null, "Dados insuficientes ou inválidos.");
+                    }
+            } catch (Exception ex) {
+                System.err.print("Catch-100 - Erro no botao Feito - Tela AddAoCardápio");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Dados insuficientes ou inválidos.");
+        }
+    }//GEN-LAST:event_btnFeitoActionPerformed
+
+    private void txtItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtItemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtItemActionPerformed
+
+    private void txtDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescricaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDescricaoActionPerformed
 
     /**
      * @param args the command line arguments

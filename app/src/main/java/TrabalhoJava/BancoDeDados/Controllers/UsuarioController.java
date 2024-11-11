@@ -5,18 +5,20 @@ import TrabalhoJava.Entidades.Usuario;
 import java.util.List;
 
 public class UsuarioController {
-    private UsuarioRepositorio usuarioRepositorio;
+    private static UsuarioRepositorio usuarioRepositorio;
 
     public UsuarioController() {
         this.usuarioRepositorio = new UsuarioRepositorio();
     }
 
-    public void salvarUsuario(String username, String senha, int permissao) {
+    public static int salvarUsuario(String username, String senha, int permissao) {
         Usuario usuario = new Usuario();
         usuario.setUser(username);
         usuario.setSenha(senha);
         usuario.setPermissao(permissao);
         usuarioRepositorio.salvar(usuario);
+
+        return 1;
     }
 
     public List<Usuario> listarUsuarios() {

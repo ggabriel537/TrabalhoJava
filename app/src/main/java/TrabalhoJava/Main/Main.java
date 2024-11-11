@@ -1,10 +1,11 @@
 package TrabalhoJava.Main;
 
-import Telas.Garcom.TelaAdicionarPedidos;
-import Telas.Garcom.TelaPedidos;
-import Telas.Gestor.TelaAdicionarAoCardapio;
-import Telas.Sistema.TelaLogin;
-import Telas.Sistema.TelaZero;
+import TrabalhoJava.Telas.Garcom.TelaAdicionarPedidos;
+import TrabalhoJava.Telas.Garcom.TelaPedidos;
+import TrabalhoJava.Telas.Gestor.TelaAdicionarAoCardapio;
+import TrabalhoJava.Telas.Gestor.TelaListarCardapio;
+import TrabalhoJava.Telas.Sistema.TelaLogin;
+import TrabalhoJava.Telas.Sistema.TelaZero;
 import TrabalhoJava.BancoDeDados.Outros.CriarDB;
 
 import javax.swing.*;
@@ -21,8 +22,10 @@ public class Main {
         new TelaAdicionarAoCardapio().setVisible(false);
         new TelaLogin().setVisible(false);
         new TelaZero().setVisible(false);
-        new TelaAdicionarPedidos().setVisible(true);
+        //new TelaAdicionarPedidos().setVisible(true);
+        
         new TelaPedidos().setVisible(true);
+        new TelaListarCardapio().setVisible(false);
 
     }
 }
