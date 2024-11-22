@@ -11,14 +11,8 @@ public class UsuarioController {
         this.usuarioRepositorio = new UsuarioRepositorio();
     }
 
-    public static int salvarUsuario(String username, String senha, int permissao) {
-        Usuario usuario = new Usuario();
-        usuario.setUser(username);
-        usuario.setSenha(senha);
-        usuario.setPermissao(permissao);
-        usuarioRepositorio.salvar(usuario);
-
-        return 1;
+    public void salvarUsuario(Usuario usr) {
+        usuarioRepositorio.salvar(usr);
     }
 
     public List<Usuario> listarUsuarios() {

@@ -7,6 +7,7 @@ import TrabalhoJava.Telas.Gestor.TelaListarCardapio;
 import TrabalhoJava.Telas.Sistema.TelaLogin;
 import TrabalhoJava.Telas.Sistema.TelaZero;
 import TrabalhoJava.BancoDeDados.Outros.CriarDB;
+import TrabalhoJava.Telas.Adm.TelaNovaConta;
 
 import javax.swing.*;
 
@@ -23,8 +24,8 @@ public class Main {
         new TelaLogin().setVisible(false);
         new TelaZero().setVisible(false);
         //new TelaAdicionarPedidos().setVisible(true);
-        
-        new TelaPedidos().setVisible(true);
+        new TelaNovaConta().setVisible(true);
+        //new TelaPedidos().setVisible(true);
         new TelaListarCardapio().setVisible(false);
 
     }

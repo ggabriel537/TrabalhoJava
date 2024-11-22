@@ -197,14 +197,14 @@ public class TelaZero extends javax.swing.JFrame {
         
         if (txtSenha.isValid() && txtUsuario.isValid()) { //Precisa ser feito, pois não há como verificar no Controller
             try {
-                int resolucao = UsuarioController.salvarUsuario(userInformado, senhaInformada, 3); //pode nao ser 3 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                if (resolucao == 1) {
+                //int resolucao = UsuarioController.salvarUsuario(userInformado, senhaInformada, 3); //pode nao ser 3 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                /*if (resolucao == 1) {
                     JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
                     dispose();
                     new TelaLogin().setVisible(true);
                 } else {
                         JOptionPane.showMessageDialog(null, "Dados insuficientes ou inválidos.");
-                    }
+                    }*/
             } catch (Exception ex) {
                 System.err.print("Catch-100 - Erro no botao comecarda TelaZero");
             }

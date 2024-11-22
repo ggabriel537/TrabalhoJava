@@ -1,21 +1,20 @@
-package TrabalhoJava.Telas.Adm;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package TrabalhoJava.Telas.Adm;
 
-import TrabalhoJava.BancoDeDados.Controllers.UsuarioController;
 import javax.swing.JOptionPane;
+
+import TrabalhoJava.BancoDeDados.Controllers.UsuarioController;
+import TrabalhoJava.Entidades.Usuario;
 
 /**
  *
  * @author Pedro
  */
 public class TelaNovaConta extends javax.swing.JFrame {
- private Integer permissaoInserida;
-
+    private Integer permissaoInserida;
     /**
      * Creates new form TelaNovaConta
      */
@@ -40,11 +39,11 @@ public class TelaNovaConta extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        permissao = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         btnSalvar = new javax.swing.JButton();
-        txtUsuario = new javax.swing.JTextField();
         txtSenha = new javax.swing.JTextField();
+        permissao = new javax.swing.JComboBox<>();
+        txtUsuario = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,13 +104,6 @@ public class TelaNovaConta extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Senha:");
 
-        permissao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Garçom", "Gestor", "Administador" }));
-        permissao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                permissaoActionPerformed(evt);
-            }
-        });
-
         jLabel4.setBackground(new java.awt.Color(0, 0, 0));
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Permissão:");
@@ -120,6 +112,19 @@ public class TelaNovaConta extends javax.swing.JFrame {
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarActionPerformed(evt);
+            }
+        });
+
+        txtSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSenhaActionPerformed(evt);
+            }
+        });
+
+        permissao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Garçom", "Gerente", "Administrador" }));
+        permissao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                permissaoActionPerformed(evt);
             }
         });
 
@@ -149,9 +154,9 @@ public class TelaNovaConta extends javax.swing.JFrame {
                                     .addComponent(jLabel4))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtSenha)
                                     .addComponent(permissao, 0, 219, Short.MAX_VALUE)
-                                    .addComponent(txtUsuario)
-                                    .addComponent(txtSenha))))))
+                                    .addComponent(txtUsuario))))))
                 .addContainerGap(89, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -169,8 +174,8 @@ public class TelaNovaConta extends javax.swing.JFrame {
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(permissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(permissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addComponent(btnSalvar)
                 .addContainerGap(34, Short.MAX_VALUE))
@@ -214,20 +219,27 @@ public class TelaNovaConta extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnSairActionPerformed
 
+    
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-     
+        // TODO add your handling code here:
         //Salva o user, senha e permissao;
-     
+
         String userInformado = txtUsuario.getText();
         String senhaInformada = txtSenha.getText();
-        Integer permissaoRecebida = permissaoInserida + 1;
+        Integer permissaoRecebida = 0;
 
-        if (txtSenha.isValid() && txtUsuario.isValid() && permissao!=null) { //Precisa ser feito, pois não há como verificar no Controller
+        if (txtSenha.isValid() && txtUsuario.isValid() && permissaoInserida!=null) { //Precisa ser feito, pois não há como verificar no Controller
             try {
-                int resolucao = UsuarioController.salvarUsuario(userInformado, senhaInformada, permissaoRecebida);
-              
-                if (resolucao == 1) {
-                   
+                Usuario usr = new Usuario();
+                usr.setUser(txtUsuario.getText());
+                usr.setSenha(txtSenha.getText());
+                usr.setPermissao(permissaoInserida);
+                UsuarioController usc = new UsuarioController();
+                usc.salvarUsuario(usr);
+                //int resolucao = UsuarioController.salvarUsuario(userInformado, senhaInformada, permissaoRecebida);
+
+                /*if (resolucao == 1) {
+
                     JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
                 } else {
                     if (resolucao == 2) {
@@ -235,21 +247,23 @@ public class TelaNovaConta extends javax.swing.JFrame {
                     } else {
                         JOptionPane.showMessageDialog(null, "Este usuário já está cadastrado no sistema.");
                     }
-                }
+                }*/
             } catch (Exception ex) {
-                System.err.print("Catch-100");
+                System.err.print(ex.getMessage());
             }
         } else {
             JOptionPane.showMessageDialog(null, "Dados insuficientes ou inválidos.");
         }
-    }
-        
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void permissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_permissaoActionPerformed
         // TODO add your handling code here:
-    permissaoInserida = permissao.getSelectedIndex();
+        permissaoInserida = permissao.getSelectedIndex();
     }//GEN-LAST:event_permissaoActionPerformed
+
+    private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSenhaActionPerformed
 
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
         // TODO add your handling code here:
@@ -262,7 +276,7 @@ public class TelaNovaConta extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
