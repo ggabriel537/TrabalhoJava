@@ -1,10 +1,7 @@
 package TrabalhoJava.BancoDeDados.Models;
 
-import TrabalhoJava.Entidades.Usuario;
-import TrabalhoJava.Entidades.Item;
 import TrabalhoJava.Entidades.Pedido;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
+import javax.persistence.*;
 import java.util.List;
 
 public class PedidoRepositorio {
