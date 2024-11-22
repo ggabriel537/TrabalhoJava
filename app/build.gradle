@@ -29,7 +29,6 @@ dependencies {
     implementation 'org.eclipse.persistence:org.eclipse.persistence.moxy:2.7.12'
     implementation 'org.eclipse.persistence:jakarta.persistence:2.2.3'
     implementation 'org.xerial:sqlite-jdbc:3.42.0.0'
-    implementation 'com.toedter:jcalendar:1.4'
 }
 
 application {

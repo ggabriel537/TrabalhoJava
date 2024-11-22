@@ -11,8 +11,15 @@ public class UsuarioController {
         this.usuarioRepositorio = new UsuarioRepositorio();
     }
 
-    public void salvarUsuario(Usuario usr) {
-        usuarioRepositorio.salvar(usr);
+    public int salvarUsuario(Usuario usr) {
+        try{
+            usuarioRepositorio.salvar(usr);
+            return 1;
+        }catch (Exception e)
+        {
+            System.err.println(e.getMessage());
+        }
+        return -1;
     }
 
     public List<Usuario> listarUsuarios() {

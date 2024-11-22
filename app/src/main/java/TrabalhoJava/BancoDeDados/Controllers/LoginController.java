@@ -23,6 +23,7 @@ public class LoginController {
                 if (user.equals(loginL.getUser())) {
                     if (senha.equals(loginL.getSenha())) {
                         sucesso = true;
+                        System.out.println(loginL.getPermissao());
                         System.err.print("Logado Com sucesso");
                         //Qual o tipo de permissão/usuário?
                         //Para descobir... Que tal:
@@ -35,15 +36,15 @@ public class LoginController {
                         //Isso serve para separar as funções disponiveis para cada usuario
 
                         switch (permissao) {
-                            case 1:
+                            case 0:
                                 new TelaPedidos().setVisible(true);
                                 break;
 
-                            case 2:
+                            case 1:
                                 new TelaCardapio().setVisible(true);
                                 break;
 
-                            case 3:
+                            case 2:
                                 new TelaAdministrador().setVisible(true);
                                 break;
 

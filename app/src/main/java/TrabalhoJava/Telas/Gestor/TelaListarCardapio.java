@@ -211,7 +211,7 @@ public class TelaListarCardapio extends javax.swing.JFrame {
             model.addRow(new Object[]{
                 item.getNomeItem(),
                  item.getPreco(),
-                item.getDescricao(),
+                item.getDescricao()
                 });
         }
     }

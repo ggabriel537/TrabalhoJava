@@ -1,5 +1,8 @@
 package TrabalhoJava.Main;
 
+import TrabalhoJava.BancoDeDados.Controllers.UsuarioController;
+import TrabalhoJava.BancoDeDados.Models.UsuarioRepositorio;
+import TrabalhoJava.Entidades.Usuario;
 import TrabalhoJava.Telas.Garcom.TelaAdicionarPedidos;
 import TrabalhoJava.Telas.Garcom.TelaPedidos;
 import TrabalhoJava.Telas.Gestor.TelaAdicionarAoCardapio;
@@ -10,6 +13,7 @@ import TrabalhoJava.BancoDeDados.Outros.CriarDB;
 import TrabalhoJava.Telas.Adm.TelaNovaConta;
 
 import javax.swing.*;
+import java.util.List;
 
 public class Main {
 
@@ -19,14 +23,9 @@ public class Main {
             CriarDB.criarArquivo();
             JOptionPane.showMessageDialog(null, "Banco Criado!\nArquivo: "+CriarDB.localbanco);
         }
-
-        new TelaAdicionarAoCardapio().setVisible(false);
-        new TelaLogin().setVisible(false);
-        new TelaZero().setVisible(false);
-        //new TelaAdicionarPedidos().setVisible(true);
-        new TelaNovaConta().setVisible(true);
-        //new TelaPedidos().setVisible(true);
-        new TelaListarCardapio().setVisible(false);
-
+        UsuarioController uc = new UsuarioController();
+        List<Usuario> ls = uc.listarUsuarios();
+        if (ls.size()>0) new TelaLogin().setVisible(true);
+        else new TelaZero().setVisible(true);
     }
 }

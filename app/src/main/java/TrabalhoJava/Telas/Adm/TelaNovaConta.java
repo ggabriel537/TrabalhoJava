@@ -20,6 +20,7 @@ public class TelaNovaConta extends javax.swing.JFrame {
      */
     public TelaNovaConta() {
         initComponents();
+        permissao.setSelectedIndex(1);
     }
 
     /**
@@ -226,7 +227,7 @@ public class TelaNovaConta extends javax.swing.JFrame {
 
         String userInformado = txtUsuario.getText();
         String senhaInformada = txtSenha.getText();
-        Integer permissaoRecebida = 0;
+        Integer permissaoRecebida = permissao.getSelectedIndex()+1;
 
         if (txtSenha.isValid() && txtUsuario.isValid() && permissaoInserida!=null) { //Precisa ser feito, pois não há como verificar no Controller
             try {
@@ -235,10 +236,11 @@ public class TelaNovaConta extends javax.swing.JFrame {
                 usr.setSenha(txtSenha.getText());
                 usr.setPermissao(permissaoInserida);
                 UsuarioController usc = new UsuarioController();
-                usc.salvarUsuario(usr);
-                //int resolucao = UsuarioController.salvarUsuario(userInformado, senhaInformada, permissaoRecebida);
 
-                /*if (resolucao == 1) {
+                int resolucao = usc.salvarUsuario(usr);
+
+                System.out.println("\n\npermissão Inserida:"+permissaoInserida);
+                if (resolucao == 1) {
 
                     JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
                 } else {
@@ -247,7 +249,7 @@ public class TelaNovaConta extends javax.swing.JFrame {
                     } else {
                         JOptionPane.showMessageDialog(null, "Este usuário já está cadastrado no sistema.");
                     }
-                }*/
+                }
             } catch (Exception ex) {
                 System.err.print(ex.getMessage());
             }

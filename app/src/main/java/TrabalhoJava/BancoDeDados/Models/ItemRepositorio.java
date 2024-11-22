@@ -18,7 +18,7 @@ public class ItemRepositorio {
 
     public static List<Item> listar() {
         EntityManager em = JPAUtil.getEntityManager();
-        List<Item> items = em.createQuery("SELECT i FROM item i", Item.class).getResultList();
+        List<Item> items = em.createQuery("SELECT i FROM Item i", Item.class).getResultList();
         em.close();
         return items;
     }

@@ -6,6 +6,8 @@ package TrabalhoJava.Telas.Sistema;
 
 
 import TrabalhoJava.BancoDeDados.Controllers.UsuarioController;
+import TrabalhoJava.Entidades.Usuario;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -194,17 +196,23 @@ public class TelaZero extends javax.swing.JFrame {
         // TODO add your handling code here:
         String userInformado = txtUsuario.getText();
         String senhaInformada = txtSenha.getText();
+        int permissao = 2;
         
         if (txtSenha.isValid() && txtUsuario.isValid()) { //Precisa ser feito, pois não há como verificar no Controller
             try {
-                //int resolucao = UsuarioController.salvarUsuario(userInformado, senhaInformada, 3); //pode nao ser 3 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                /*if (resolucao == 1) {
+                UsuarioController uc = new UsuarioController();
+                Usuario u = new Usuario();
+                u.setUser(userInformado);
+                u.setSenha(senhaInformada);
+                u.setPermissao(permissao);
+                int resolucao = uc.salvarUsuario(u);
+                if (resolucao == 1) {
                     JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
                     dispose();
                     new TelaLogin().setVisible(true);
                 } else {
                         JOptionPane.showMessageDialog(null, "Dados insuficientes ou inválidos.");
-                    }*/
+                    }
             } catch (Exception ex) {
                 System.err.print("Catch-100 - Erro no botao comecarda TelaZero");
             }

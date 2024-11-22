@@ -5,6 +5,8 @@
 package TrabalhoJava.Telas.Garcom;
 
 import TrabalhoJava.BancoDeDados.Controllers.PedidoController;
+import TrabalhoJava.Entidades.Pedido;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -198,7 +200,7 @@ public class TelaAdicionarPedidos extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Dados insuficientes ou inválidos.");
                     }
             } catch (Exception ex) {
-                System.err.print("Catch-100 - Erro no botao salvar - Tela addPedidos");
+                System.err.print("\n"+ex.getMessage());
             }
         } else {
             JOptionPane.showMessageDialog(null, "Dados insuficientes ou inválidos.");
