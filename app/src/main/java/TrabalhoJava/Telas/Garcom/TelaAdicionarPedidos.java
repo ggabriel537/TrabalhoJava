@@ -5,7 +5,6 @@
 package TrabalhoJava.Telas.Garcom;
 
 import TrabalhoJava.BancoDeDados.Controllers.PedidoController;
-import TrabalhoJava.Entidades.Pedido;
 
 import javax.swing.JOptionPane;
 
@@ -189,10 +188,13 @@ public class TelaAdicionarPedidos extends javax.swing.JFrame {
         String ItemInformado = txtItem.getText();
         Integer MesaInformada = (Integer) numMesa.getValue();
 
-        
+        PedidoController pedidoController= new PedidoController();
+
+        System.out.print("\nItem:"+ItemInformado);
+        System.out.print("\nmesa:"+MesaInformada);
         if (txtItem.isValid() && MesaInformada!=null) { //Precisa ser feito, pois não há como verificar no Controller
             try {
-                int resolucao = PedidoController.salvarPedido(MesaInformada,ItemInformado);
+                int resolucao = pedidoController.salvarPedido(MesaInformada,ItemInformado);
                 if (resolucao == 1) {
                     JOptionPane.showMessageDialog(null, "Item cadastrado com sucesso!");
                     dispose();

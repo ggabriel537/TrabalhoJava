@@ -267,10 +267,12 @@ public class TelaPedidos extends javax.swing.JFrame {
         JTextField textFieldUser = new JTextField();
 int optionAdverte = JOptionPane.showConfirmDialog(null, textFieldUser, "Informe o ID do pedido para Concluí-lo", JOptionPane.OK_CANCEL_OPTION);
 
+PedidoController pedidoController = new PedidoController();
+
 if (optionAdverte == JOptionPane.OK_OPTION) {
     try {
         Integer convertido = Integer.parseInt(textFieldUser.getText());
-        int exito = PedidoController.deletarPedido(convertido);
+        int exito = pedidoController.deletarPedido(convertido);
         if (exito == 1) {
             JOptionPane.showMessageDialog(null, "O pedido foi marcado como Concluído.");
         } else {

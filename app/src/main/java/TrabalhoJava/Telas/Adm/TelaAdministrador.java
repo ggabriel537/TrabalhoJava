@@ -232,7 +232,7 @@ dispose();        // TODO add your handling code here:
 
     private void btnCriarNovaContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarNovaContaActionPerformed
         // TODO add your handling code here:
-        new TrabalhoJava.Telas.Adm.TelaAdministrador().setVisible(true);
+        new TrabalhoJava.Telas.Adm.TelaNovaConta().setVisible(true);
     }//GEN-LAST:event_btnCriarNovaContaActionPerformed
 
     /**

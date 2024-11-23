@@ -8,7 +8,7 @@ public class PedidoController {
     private static PedidoRepositorio pedidoRepositorio;
 
     public PedidoController() {
-        pedidoRepositorio = new PedidoRepositorio();
+        this.pedidoRepositorio = new PedidoRepositorio();
     }
 
     public static int salvarPedido(int mesa, String item) {
