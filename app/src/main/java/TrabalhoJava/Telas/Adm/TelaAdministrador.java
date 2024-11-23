@@ -4,8 +4,8 @@
  */
 package TrabalhoJava.Telas.Adm;
 
-import Telas.Garcom.TelaPedidos;
-import Telas.Gestor.TelaCardapio;
+import  TrabalhoJava.Telas.Garcom.TelaPedidos;
+import TrabalhoJava.Telas.Gestor.TelaCardapio;
 
 /**
  *
@@ -232,7 +232,7 @@ dispose();        // TODO add your handling code here:
 
     private void btnCriarNovaContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarNovaContaActionPerformed
         // TODO add your handling code here:
-        new Telas.Adm.TelaNovaConta().setVisible(true);
+        new TrabalhoJava.Telas.Adm.TelaNovaConta().setVisible(true);
     }//GEN-LAST:event_btnCriarNovaContaActionPerformed
 
     /**

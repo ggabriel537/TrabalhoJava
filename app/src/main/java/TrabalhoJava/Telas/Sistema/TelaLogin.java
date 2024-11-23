@@ -2,7 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Telas.Sistema;
+package TrabalhoJava.Telas.Sistema;
+
+import TrabalhoJava.BancoDeDados.Controllers.LoginController;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -97,6 +100,12 @@ public class TelaLogin extends javax.swing.JFrame {
             }
         });
 
+        txtSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSenhaActionPerformed(evt);
+            }
+        });
+
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("PedidoFacil");
@@ -177,11 +186,35 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         // TODO add your handling code here:
+        String user = null;
+        String senha = null;
+        
+        //Envia o user e senha para login
+        
+         if (txtUsuario.getText() != null && !txtUsuario.getText().isEmpty() && txtSenha.getText() != null && !txtSenha.getText().isEmpty()) {
+
+            user = txtUsuario.getText();
+            senha = txtSenha.getText();
+
+            boolean confirmacao = LoginController.validaLogin(user, senha);
+            if (confirmacao) {
+                JOptionPane.showMessageDialog(null, "Logado com sucesso!");
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuario ou senha não batem.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Dados inválidos");
+        }
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsuarioActionPerformed
+
+    private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSenhaActionPerformed
 
     /**
      * @param args the command line arguments

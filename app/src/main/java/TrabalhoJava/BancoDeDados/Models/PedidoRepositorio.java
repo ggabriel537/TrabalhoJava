@@ -1,13 +1,12 @@
 package TrabalhoJava.BancoDeDados.Models;
 
-import TrabalhoJava.Entidades.*;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
+import TrabalhoJava.Entidades.Pedido;
+import javax.persistence.*;
 import java.util.List;
 
 public class PedidoRepositorio {
 
-    public void salvar(Entidades.Pedido pedido) {
+    public void salvar(Pedido pedido) {
         EntityManager em = JPAUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
@@ -16,9 +15,9 @@ public class PedidoRepositorio {
         em.close();
     }
 
-    public List<Entidades.Pedido> listar() {
+    public static List<Pedido> listar() {
         EntityManager em = JPAUtil.getEntityManager();
-        List<Entidades.Pedido> pedidos = em.createQuery("SELECT p FROM Pedido p", Entidades.Pedido.class).getResultList();
+        List<Pedido> pedidos = em.createQuery("SELECT p FROM Pedido p", Pedido.class).getResultList();
         em.close();
         return pedidos;
     }
@@ -27,7 +26,7 @@ public class PedidoRepositorio {
         EntityManager em = JPAUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
-        Entidades.Pedido pedido = em.find(Entidades.Pedido.class, id);
+        Pedido pedido = em.find(Pedido.class, id);
         if (pedido != null) {
             em.remove(pedido);
         }
@@ -35,7 +34,7 @@ public class PedidoRepositorio {
         em.close();
     }
 
-    public void atualizar(Entidades.Pedido pedido) {
+    public void atualizar(Pedido pedido) {
         EntityManager em = JPAUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();

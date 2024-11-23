@@ -1,6 +1,6 @@
 package TrabalhoJava.Entidades;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 
 @Entity
